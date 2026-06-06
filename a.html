@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio của Cường | Hàng không Vũ trụ</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="weblogo.png" type="image/png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cosmic: {
+                            bg: '#0A0A0A',
+                            card: '#141414',
+                            text: '#D8D4CF',
+                            accent: '#D4AF37', 
+                            muted: '#7A7A7A'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0A0A0A;
+            color: #D8D4CF;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* --- HIỆU ỨNG ANIMATION --- */
+        .word {
+            display: inline-block;
+            opacity: 0;
+            filter: blur(8px);
+            transform: translateY(15px);
+            transition: opacity 0.8s ease, filter 0.8s ease, transform 0.8s ease;
+            will-change: filter, transform, opacity;
+        }
+        .word.visible {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateY(0);
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HIỆU ỨNG LA BÀN XOAY VÔ HẠN --- */
+        @keyframes compassRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .compass-spin {
+            animation: compassRotate 25s linear infinite;
+        }
+
+        /* Card Hover Effects */
+        .project-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        .project-card:hover .pdf-box {
+            border-color: #D4AF37;
+        }
+        .pdf-box {
+            transition: border-color 0.4s ease;
+        }
+        .nav-link.active {
+            color: #D4AF37;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans bg-[#0A0A0A] selection:bg-cosmic-accent selection:text-black">
+
+    <div class="fixed inset-0 w-full h-full overflow-hidden z-[-1] pointer-events-none">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-30">
+            <source src="space.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#0A0A0A]/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                <img src="logo.png" alt="VNU Logo" class="w-11 h-11 object-contain rounded-full">
+                <div class="font-sans text-[10px] uppercase tracking-widest text-gray-300 leading-tight">
+                    Đại học<br>Quốc gia Hà Nội
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-10">
+                <a href="#intro" class="nav-link font-sans text-xs uppercase tracking-[0.2em] text-gray-300 hover:text-cosmic-accent transition-colors">Giới thiệu</a>
+                <a href="#projects" class="nav-link font-sans text-xs uppercase tracking-[0.2em] text-gray-300 hover:text-cosmic-accent transition-colors">Dự án</a>
+                <a href="#conclusion" class="nav-link font-sans text-xs uppercase tracking-[0.2em] text-gray-300 hover:text-cosmic-accent transition-colors">Tổng kết</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="min-h-screen pt-20 flex flex-col justify-center max-w-7xl mx-auto px-6 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="z-10">
+                    <div class="anim-text font-serif text-6xl md:text-8xl lg:text-9xl text-[#F5F5F5] leading-[0.9]">Portfolio</div>
+                    <div class="anim-text font-serif italic text-cosmic-muted text-5xl md:text-7xl lg:text-8xl mt-2 block">của Cường</div>
+                </div>
+
+                <div class="flex justify-center lg:justify-end z-0 pointer-events-none fade-in-up relative" style="transition-delay: 0.5s;">
+                    <div class="relative w-64 h-64 md:w-96 md:h-96 flex items-center justify-center">
+                        <svg viewBox="0 0 200 200" fill="none" class="absolute inset-0 w-full h-full">
+                            <circle cx="100" cy="100" r="90" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4 4"/>
+                            <circle cx="100" cy="100" r="140" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                        </svg>
+                        <img src="sun.png" alt="Sun Graphic" class="w-48 h-48 md:w-72 md:h-72 object-contain opacity-80 relative z-10">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="intro" class="py-32 border-t border-white/5 max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+                
+                <div class="flex flex-col items-center md:items-start gap-10">
+                    <h2 class="font-serif text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] text-center md:text-left">
+                        <span class="anim-text block">Giới thiệu</span>
+                        <span class="anim-text block">bản thân</span>
+                    </h2>
+                    
+                    <div class="w-48 md:w-60 aspect-[3/4] bg-cosmic-card border border-white/5 p-2 rounded relative group/avatar shadow-2xl transition-all duration-500 hover:border-cosmic-accent/30">
+                        <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-cosmic-accent"></div>
+                        <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-cosmic-accent"></div>
+                        <div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-cosmic-accent"></div>
+                        <div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-cosmic-accent"></div>
+                        
+                        <div class="w-full h-full overflow-hidden bg-black relative rounded-sm">
+                            <img src="avatar.png" alt="Phạm Mạnh Cường Avatar" class="w-full h-full object-cover opacity-100 group-hover/avatar:scale-[1.05] transition-transform duration-700">
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <ul class="font-sans text-sm md:text-base leading-[1.8] font-light space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-cosmic-accent mt-0.5 flex-shrink-0">•</span>
+                            <div class="flex flex-wrap gap-x-1">
+                                <strong class="anim-text text-white font-semibold">Họ và tên:</strong> 
+                                <span class="anim-text text-gray-300">Phạm Mạnh Cường</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-cosmic-accent mt-0.5 flex-shrink-0">•</span>
+                            <div class="flex flex-wrap gap-x-1">
+                                <strong class="anim-text text-white font-semibold">MSSV:</strong> 
+                                <span class="anim-text text-gray-300">25021510</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-cosmic-accent mt-0.5 flex-shrink-0">•</span>
+                            <div class="flex flex-wrap gap-x-1">
+                                <strong class="anim-text text-white font-semibold">Ngành:</strong> 
+                                <span class="anim-text text-gray-300">Công nghệ Hàng không Vũ trụ</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-cosmic-accent mt-0.5 flex-shrink-0">•</span>
+                            <div class="flex flex-wrap gap-x-1">
+                                <strong class="anim-text text-white font-semibold">Định hướng phát triển:</strong> 
+                                <span class="anim-text text-gray-300">Trở thành Kỹ sư Công nghệ Hàng không Vũ trụ chuyên sâu về mô phỏng thuật toán và phát triển hệ thống điều khiển tự hành.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-cosmic-accent mt-0.5 flex-shrink-0">•</span>
+                            <div class="flex flex-wrap gap-x-1">
+                                <strong class="anim-text text-white font-semibold">Mục tiêu của Portfolio:</strong> 
+                                <span class="anim-text text-gray-300">Hệ thống hóa và minh chứng cho những kỹ năng số cùng năng lực ứng dụng công nghệ em đã tích lũy được qua từng tuần học. Đồng thời, đây cũng là một không gian lưu trữ khoa học giúp em dễ dàng quản lý, nhìn nhận lại sự tiến bộ của bản thân và chia sẻ các sản phẩm của mình.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-32 border-t border-white/5 max-w-7xl mx-auto px-6">
+            <div class="mb-16">
+                <h2 class="anim-text font-serif text-5xl md:text-6xl text-white mb-6">Dự án & Bài tập</h2>
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                    <p class="anim-text font-sans text-sm text-white/70 font-light max-w-lg">
+                        Nhấn vào từng bài tập để xem PDF trực tiếp. Sử dụng nút tải về để lưu về máy.
+                    </p>
+                    <p class="anim-text font-sans text-sm text-white/70 font-light max-w-lg">[06 bài tập]</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="project-card group cursor-pointer fade-in-up" onclick="openPdf('bài tập 1.pdf')" style="transition-delay: 0.1s;">
+                    <div class="pdf-box w-full aspect-[4/3] bg-cosmic-card border border-white/5 mb-6 relative overflow-hidden flex items-center justify-center">
+                        <img src="ảnh 1.jpg" alt="Bài 1" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500 rounded z-0">
+                        <div class="absolute top-4 left-4 font-serif text-3xl text-white/80 drop-shadow-md group-hover:text-cosmic-accent transition-colors z-10">01</div>
+                    </div>
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="font-sans font-medium text-white mb-2 text-sm"><span class="text-cosmic-muted mr-1">[01]</span> Thao tác cơ bản với tệp tin và thư mục</h3>
+                            <p class="font-sans text-xs text-cosmic-muted font-light leading-relaxed line-clamp-2">Báo cáo thực hành chi tiết các kỹ năng quản lý, tạo, sao chép và cấu trúc thư mục trên hệ điều hành.</p>
+                        </div>
+                        <div class="relative group/tooltip">
+                            <a href="bài tập 1.pdf" download class="shrink-0 w-8 h-8 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" onclick="event.stopPropagation()">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </a>
+                            <div class="absolute bottom-full mb-2 right-0 bg-[#141414] border border-white/10 text-cosmic-text text-[9px] tracking-widest uppercase px-2 py-1 whitespace-nowrap opacity-0 pointer-events-none group-hover/tooltip:opacity-100 transition-all duration-300 rounded shadow-lg">Xem chi tiết</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer fade-in-up" onclick="openPdf('bài tập 2.pdf')" style="transition-delay: 0.2s;">
+                    <div class="pdf-box w-full aspect-[4/3] bg-cosmic-card border border-white/5 mb-6 relative overflow-hidden flex items-center justify-center">
+                        <img src="ảnh 2.jpg" alt="Bài 2" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500 rounded z-0">
+                        <div class="absolute top-4 left-4 font-serif text-3xl text-white/80 drop-shadow-md group-hover:text-cosmic-accent transition-colors z-10">02</div>
+                    </div>
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="font-sans font-medium text-white mb-2 text-sm"><span class="text-cosmic-muted mr-1">[02]</span> Tìm kiếm và đánh giá thông tin học thuật</h3>
+                            <p class="font-sans text-xs text-cosmic-muted font-light leading-relaxed line-clamp-2">Nghiên cứu ứng dụng Computer Vision và Deep Learning trong hệ thống nhận diện bãi đáp UAV.</p>
+                        </div>
+                        <div class="relative group/tooltip">
+                            <a href="bài tập 2.pdf" download class="shrink-0 w-8 h-8 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" onclick="event.stopPropagation()">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </a>
+                            <div class="absolute bottom-full mb-2 right-0 bg-[#141414] border border-white/10 text-cosmic-text text-[9px] tracking-widest uppercase px-2 py-1 whitespace-nowrap opacity-0 pointer-events-none group-hover/tooltip:opacity-100 transition-all duration-300 rounded shadow-lg">Xem chi tiết</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer fade-in-up" onclick="openPdf('bài tập 3.pdf')" style="transition-delay: 0.3s;">
+                    <div class="pdf-box w-full aspect-[4/3] bg-cosmic-card border border-white/5 mb-6 relative overflow-hidden flex items-center justify-center">
+                        <img src="ảnh 3.jpg" alt="Bài 3" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500 rounded z-0">
+                        <div class="absolute top-4 left-4 font-serif text-3xl text-white/80 drop-shadow-md group-hover:text-cosmic-accent transition-colors z-10">03</div>
+                    </div>
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="font-sans font-medium text-white mb-2 text-sm"><span class="text-cosmic-muted mr-1">[03]</span> Viết Prompt hiệu quả cho các tác vụ học tập</h3>
+                            <p class="font-sans text-xs text-cosmic-muted font-light leading-relaxed line-clamp-2">Viết prompt hiệu quả cho các tác vụ học tập, khai thác tối đa năng lực xử lý của các mô hình LLM.</p>
+                        </div>
+                        <div class="relative group/tooltip">
+                            <a href="bài tập 3.pdf" download class="shrink-0 w-8 h-8 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" onclick="event.stopPropagation()">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </a>
+                            <div class="absolute bottom-full mb-2 right-0 bg-[#141414] border border-white/10 text-cosmic-text text-[9px] tracking-widest uppercase px-2 py-1 whitespace-nowrap opacity-0 pointer-events-none group-hover/tooltip:opacity-100 transition-all duration-300 rounded shadow-lg">Xem chi tiết</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer fade-in-up" onclick="openPdf('bài tập 4.pdf')" style="transition-delay: 0.4s;">
+                    <div class="pdf-box w-full aspect-[4/3] bg-cosmic-card border border-white/5 mb-6 relative overflow-hidden flex items-center justify-center">
+                        <img src="ảnh 4.jpg" alt="Bài 4" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500 rounded z-0">
+                        <div class="absolute top-4 left-4 font-serif text-3xl text-white/80 drop-shadow-md group-hover:text-cosmic-accent transition-colors z-10">04</div>
+                    </div>
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="font-sans font-medium text-white mb-2 text-sm"><span class="text-cosmic-muted mr-1">[04]</span> Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm</h3>
+                            <p class="font-sans text-xs text-cosmic-muted font-light leading-relaxed line-clamp-2">Báo cáo ứng dụng Trello, Docs, Drive, Discord trong việc điều phối dự án mô phỏng AI học máy tên lửa.</p>
+                        </div>
+                        <div class="relative group/tooltip">
+                            <a href="bài tập 4.pdf" download class="shrink-0 w-8 h-8 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" onclick="event.stopPropagation()">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </a>
+                            <div class="absolute bottom-full mb-2 right-0 bg-[#141414] border border-white/10 text-cosmic-text text-[9px] tracking-widest uppercase px-2 py-1 whitespace-nowrap opacity-0 pointer-events-none group-hover/tooltip:opacity-100 transition-all duration-300 rounded shadow-lg">Xem chi tiết</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer fade-in-up" onclick="openPdf('bài tập 5.pdf')" style="transition-delay: 0.5s;">
+                    <div class="pdf-box w-full aspect-[4/3] bg-cosmic-card border border-white/5 mb-6 relative overflow-hidden flex items-center justify-center">
+                        <img src="ảnh 5.jpg" alt="Bài 5" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500 rounded z-0">
+                        <div class="absolute top-4 left-4 font-serif text-3xl text-white/80 drop-shadow-md group-hover:text-cosmic-accent transition-colors z-10">05</div>
+                    </div>
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="font-sans font-medium text-white mb-2 text-sm"><span class="text-cosmic-muted mr-1">[05]</span> Sử dụng AI tạo sinh để hỗ trợ sáng tạo nội dung</h3>
+                            <p class="font-sans text-xs text-cosmic-muted font-light leading-relaxed line-clamp-2">Ứng dụng AI tạo sinh (Gemini, Midjourney, Canva) thiết kế chiến dịch "Gen Z & Lối sống xanh".</p>
+                        </div>
+                        <div class="relative group/tooltip">
+                            <a href="bài tập 5.pdf" download class="shrink-0 w-8 h-8 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" onclick="event.stopPropagation()">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </a>
+                            <div class="absolute bottom-full mb-2 right-0 bg-[#141414] border border-white/10 text-cosmic-text text-[9px] tracking-widest uppercase px-2 py-1 whitespace-nowrap opacity-0 pointer-events-none group-hover/tooltip:opacity-100 transition-all duration-300 rounded shadow-lg">Xem chi tiết</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card group cursor-pointer fade-in-up" onclick="openPdf('bài tập 6.pdf')" style="transition-delay: 0.6s;">
+                    <div class="pdf-box w-full aspect-[4/3] bg-cosmic-card border border-white/5 mb-6 relative overflow-hidden flex items-center justify-center">
+                        <img src="ảnh 6.jpg" alt="Bài 6" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500 rounded z-0">
+                        <div class="absolute top-4 left-4 font-serif text-3xl text-white/80 drop-shadow-md group-hover:text-cosmic-accent transition-colors z-10">06</div>
+                    </div>
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 class="font-sans font-medium text-white mb-2 text-sm"><span class="text-cosmic-muted mr-1">[06]</span> Sử dụng AI có trách nhiệm trong học tập và nghiên cứu</h3>
+                            <p class="font-sans text-xs text-cosmic-muted font-light leading-relaxed line-clamp-2">Báo cáo nghiên cứu chính sách & phát triển kỹ năng sử dụng AI có trách nhiệm trong học thuật.</p>
+                        </div>
+                        <div class="relative group/tooltip">
+                            <a href="bài tập 6.pdf" download class="shrink-0 w-8 h-8 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors" onclick="event.stopPropagation()">
+                                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            </a>
+                            <div class="absolute bottom-full mb-2 right-0 bg-[#141414] border border-white/10 text-cosmic-text text-[9px] tracking-widest uppercase px-2 py-1 whitespace-nowrap opacity-0 pointer-events-none group-hover/tooltip:opacity-100 transition-all duration-300 rounded shadow-lg">Xem chi tiết</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion" class="py-32 border-t border-white/5 max-w-7xl mx-auto px-6 mb-20 text-center flex flex-col items-center">
+            <div class="mb-12">
+                <h2 class="anim-text font-serif text-6xl md:text-7xl text-white mb-4">Tổng kết</h2>
+                <p class="anim-text font-sans text-sm text-white/80 font-light max-w-lg">
+                    Nhấn vào các ô chữ để xem thêm thông tin chi tiết
+                </p>
+            </div>
+
+            <div class="relative w-full max-w-4xl h-[520px] flex items-center justify-center fade-in-up mt-10 mx-auto">
+                
+                <div id="compass-view" class="relative flex items-center justify-center w-[500px] h-[500px] transition-all duration-500 opacity-100 scale-100 z-10 mx-auto text-center">
+                    
+                    <div class="relative w-[480px] h-[480px] flex items-center justify-center compass-spin mx-auto text-center">
+                        <svg width="340" height="340" viewBox="0 0 200 200" fill="none" class="opacity-90">
+                            <circle cx="100" cy="100" r="95" stroke="#D4AF37" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.6"/>
+                            <circle cx="100" cy="100" r="82" stroke="#D4AF37" stroke-width="0.6" opacity="0.4"/>
+                            <path d="M100 12 L108 92 L188 100 L108 108 L100 188 L92 108 L12 100 L92 92 Z" fill="#141414" stroke="#D4AF37" stroke-width="1.2"/>
+                            <path d="M100 42 L112 88 L158 100 L112 112 L100 158 L88 112 L42 100 L88 88 Z" fill="#0A0A0A" stroke="#D4AF37" stroke-width="1.0" opacity="0.6"/>
+                            <circle cx="100" cy="100" r="8" fill="#D4AF37"/>
+                            <circle cx="100" cy="100" r="3" fill="#0A0A0A"/>
+                        </svg>
+
+                        <button onclick="openTab('trainghiem'); event.stopPropagation();" 
+                                class="absolute top-1/2 left-1/2 text-white hover:text-cosmic-accent font-serif text-lg tracking-[0.2em] uppercase transition-colors whitespace-nowrap z-20 bg-[#0A0A0A]/60 px-3 py-1 rounded backdrop-blur-sm"
+                                style="transform: translate(-50%, -50%) rotate(0deg) translateY(-210px);">
+                            Trải nghiệm
+                        </button>
+                        <button onclick="openTab('loiket'); event.stopPropagation();" 
+                                class="absolute top-1/2 left-1/2 text-white hover:text-cosmic-accent font-serif text-lg tracking-[0.2em] uppercase transition-colors whitespace-nowrap z-20 bg-[#0A0A0A]/60 px-3 py-1 rounded backdrop-blur-sm"
+                                style="transform: translate(-50%, -50%) rotate(90deg) translateY(-210px);">
+                            Lời kết
+                        </button>
+                        <button onclick="openTab('kynang'); event.stopPropagation();" 
+                                class="absolute top-1/2 left-1/2 text-white hover:text-cosmic-accent font-serif text-lg tracking-[0.2em] uppercase transition-colors whitespace-nowrap z-20 bg-[#0A0A0A]/60 px-3 py-1 rounded backdrop-blur-sm"
+                                style="transform: translate(-50%, -50%) rotate(180deg) translateY(-210px);">
+                            Kỹ năng
+                        </button>
+                        <button onclick="openTab('thachthuc'); event.stopPropagation();" 
+                                class="absolute top-1/2 left-1/2 text-white hover:text-cosmic-accent font-serif text-lg tracking-[0.2em] uppercase transition-colors whitespace-nowrap z-20 bg-[#0A0A0A]/60 px-3 py-1 rounded backdrop-blur-sm"
+                                style="transform: translate(-50%, -50%) rotate(270deg) translateY(-210px);">
+                            Thách thức
+                        </button>
+                    </div>
+                </div>
+
+                <div id="content-view" class="absolute inset-0 w-full h-full bg-cosmic-card border border-white/10 p-8 md:p-12 rounded-lg translate-y-full opacity-0 pointer-events-none transition-all duration-700 cubic-bezier(0.1, 0.8, 0.2, 1) z-40 flex flex-col justify-center text-left shadow-2xl backdrop-blur-md overflow-hidden max-w-4xl mx-auto">
+                    <button onclick="closeTab()" class="absolute top-6 left-6 text-[10px] uppercase tracking-widest text-cosmic-muted hover:text-cosmic-accent transition-colors flex items-center gap-2 z-50">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Quay lại
+                    </button>
+
+                    <div class="mt-6 overflow-y-auto overflow-x-hidden max-h-[340px] pr-2 w-full block text-left selection:bg-cosmic-accent selection:text-black">
+                        
+                        <div id="tab-trainghiem" class="hidden content-pane w-full">
+                            <h3 class="font-serif text-2xl md:text-3xl text-cosmic-accent mb-4 tracking-wide uppercase anim-text">[ Trải nghiệm cá nhân ]</h3>
+                            <p class="font-sans text-sm text-cosmic-text leading-relaxed font-light mb-4 text-justify anim-text">
+                                Dự án xây dựng Digital Portfolio cho môn Nhập môn Công nghệ số và Ứng dụng AI đã giúp em tổng hợp trọn vẹn chuỗi 6 bài tập chuyên đề thành một hệ thống tri thức thống nhất. Đối với một sinh viên tại UET, quá trình tự tay đúc kết những thách thức, điểm tâm đắc và kỹ năng cốt lõi tại trang tổng kết không chỉ đơn thuần là hoàn thành một bộ hồ sơ số. Đây chính là tấm gương phản chiếu sự trưởng thành vượt bậc trong tư duy công nghệ, giúp em tự tin định vị bản thân và làm chủ các công cụ số một cách văn minh, trách nhiệm. 
+                            </p>
+                        </div>
+
+                        <div id="tab-kynang" class="hidden content-pane w-full">
+                            <h3 class="font-serif text-2xl md:text-3xl text-cosmic-accent mb-5 tracking-wide uppercase anim-text">[ Kỹ năng tích lũy ]</h3>
+                            <ul class="font-sans text-sm text-cosmic-text leading-[1.7] font-light space-y-4 w-full">
+                                <li class="flex items-start gap-3 w-full">
+                                    <span class="text-cosmic-accent mt-0.5 flex-shrink-0">•</span>
+                                    <div class="w-full">
+                                        <strong class="text-white font-medium anim-text pr-1">Quản trị hệ thống tệp tin và tổ chức thông tin khoa học:</strong>
+                                        <span class="anim-text">Thành thạo việc áp dụng các quy chuẩn đặt tên đồng bộ, thiết lập kiến trúc cây thư mục đa cấp logic để tối ưu hóa không gian lưu trữ và tăng tốc độ truy xuất dữ liệu.</span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3 w-full">
+                                    <span class="text-cosmic-accent mt-0.5 flex-shrink-0">•</span>
+                                    <div class="w-full">
+                                        <strong class="text-white font-medium anim-text pr-1">Kỹ nghệ câu lệnh (Prompt Engineering) nâng cao:</strong>
+                                        <span class="anim-text">Khai thác hiệu quả năng lực của các mô hình ngôn ngữ lớn qua các kỹ thuật đóng vai và chuỗi tư duy (CoT); đồng thời hình thành bộ lọc phản biện để phát hiện và xử lý triệt để hiện tượng ảo tưởng (Hallucination) của AI. </span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3 w-full">
+                                    <span class="text-cosmic-accent mt-0.5 flex-shrink-0">•</span>
+                                    <div class="w-full">
+                                        <strong class="text-white font-medium anim-text pr-1">Cộng tác trực tuyến và Thiết kế trực quan (UX/UI):</strong>
+                                        <span class="anim-text">Làm chủ các hạ tầng làm việc nhóm từ xa, tối ưu hóa quy trình phối hợp liên công cụ; đồng thời ứng dụng tư duy thiết kế UX/UI để tổ chức một không gian nội dung số ngăn nắp, trực quan và dễ tiếp cận. </span>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3 w-full">
+                                    <span class="text-cosmic-accent mt-0.5 flex-shrink-0">•</span>
+                                    <div class="w-full">
+                                        <strong class="text-white font-medium anim-text pr-1">Đánh giá thông tin học thuật và Liêm chính số</strong>
+                                        <span class="anim-text">Xây dựng năng lực phân tích, thẩm định tính xác thực của các nguồn tài liệu công nghệ, nắm vững ranh giới giữa hỗ trợ học thuật hợp lý và gian lận để thực hiện trích dẫn minh bạch. </span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="tab-thachthuc" class="hidden content-pane w-full">
+                            <h3 class="font-serif text-2xl md:text-3xl text-cosmic-accent mb-4 tracking-wide uppercase anim-text">[ Thách thức gặp phải ]</h3>
+                            <p class="font-sans text-sm text-cosmic-text leading-relaxed font-light mb-4 text-justify anim-text">
+                                Cái khó nhất với em chắc là việc tìm hiểu cách làm như nào và bắt đầu từ đâu. Mấy ngày đầu em đã phải loay hoay về cách để tạo ra giao diện trang web và chỉnh sửa cho nó cân xứng,và phải suy nghĩ nên viết prompt như nào để AI có thể hỗ trợ mình. Mặt khác, thông tin đổ về rất nhiều, nên em cũng phải lọc xem cái nào chuẩn để có thể đưa vào báo cáo. Và dù là em có làm theo hướng dẫn hay tham khảo những mẫu trang web portfolio khác nhưng em vẫn luôn cố đưa chất riêng của mình vào, vì có lẽ như vậy mới làm nổi bật nên được chữ “cá nhân” trong dự án lần này!!!
+                            </p>
+                        </div>
+
+                        <div id="tab-loiket" class="hidden content-pane w-full">
+                            <h3 class="font-serif text-2xl md:text-3xl text-cosmic-accent mb-4 tracking-wide uppercase anim-text">[ Lời kết ]</h3>
+                            <p class="font-sans text-sm text-cosmic-text leading-relaxed font-light mb-4 text-justify anim-text">
+                                Lời cuối cùng, em muốn gửi một lời cảm ơn thật lòng đến thầy cô. Thú thực là lúc mới đầu em thấy môn này vừa mới vừa ngợp, nhưng nhờ sự định hướng và những bài tập cực kỳ thực tế của thầy cô mà em đã vỡ ra được rất nhiều điều, biết cách biến AI thành trợ lý chứ không để nó làm lười tư duy của mình. Dự án Portfolio này đối với em không chỉ là một bài tập để lấy điểm, mà là một cột mốc ý nghĩa giúp em nhìn rõ sự tiến bộ của bản thân và tự tin hơn rất nhiều trên hành trình học tập sắp tới tại UET. Em xin kính chúc thầy cô luôn nhiều sức khỏe và luôn giữ mãi ngọn lửa nhiệt huyết với tụi sinh viên chúng em!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-8 border-t border-white/5 text-center font-sans text-[10px] uppercase tracking-widest text-cosmic-muted">
+        &copy; 2026 CƯỜNG - SINH VIÊN ĐẠI HỌC CÔNG NGH | Build with patience.
+    </footer>
+
+    <div id="pdf-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="w-full max-w-5xl h-[85vh] bg-[#141414] border border-white/10 p-2 relative flex flex-col rounded-lg shadow-2xl">
+            <button onclick="closePdf()" class="absolute -top-10 right-0 text-white hover:text-cosmic-accent text-sm tracking-widest uppercase transition-colors z-[110]">Đóng [X] (hoặc Esc)</button>
+            <iframe id="pdf-viewer" src="" class="w-full h-full border-0 bg-white rounded"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // TÁCH CHỮ ĐỂ LÀM HIỆU ỨNG BLUR CHO TIÊU ĐỀ TRANG CHÍNH
+        function splitTextForAnimation() {
+            document.querySelectorAll('section:not(#conclusion) .anim-text, #conclusion > div > .anim-text').forEach(el => {
+                const text = el.innerText;
+                el.innerHTML = '';
+                text.split(' ').forEach(word => {
+                    if (word.trim() !== '') {
+                        const span = document.createElement('span');
+                        span.className = 'word';
+                        span.innerText = word;
+                        el.appendChild(span);
+                        el.appendChild(document.createTextNode(' '));
+                    }
+                });
+            });
+        }
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const words = entry.target.querySelectorAll('.word');
+                    words.forEach((word, index) => {
+                        setTimeout(() => { word.classList.add('visible'); }, index * 40); 
+                    });
+                    if (entry.target.classList.contains('fade-in-up')) {
+                        entry.target.classList.add('visible');
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        splitTextForAnimation();
+        document.querySelectorAll('.anim-text, .fade-in-up').forEach(el => { observer.observe(el); });
+
+        // SCROLL SPY
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // LOGIC MỞ/ĐÓNG PDF & ESC
+        function openPdf(pdfUrl) {
+            const modal = document.getElementById('pdf-modal');
+            const viewer = document.getElementById('pdf-viewer');
+            viewer.src = pdfUrl; 
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closePdf() {
+            const modal = document.getElementById('pdf-modal');
+            const viewer = document.getElementById('pdf-viewer');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            document.body.style.overflow = 'auto'; 
+            setTimeout(() => { viewer.src = ''; }, 300);
+        }
+
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' || event.keyCode === 27) {
+                closePdf();
+            }
+        });
+
+        // THUẬT TOÁN CASCADE: TẠO HIỆU ỨNG CHỮ HIỆN MƯỢT MÀ ĐỒNG BỘ NGUYÊN KHỐI
+        function openTab(tabId) {
+            const contentView = document.getElementById('content-view');
+            contentView.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
+            contentView.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            
+            const tabs = ['trainghiem', 'kynang', 'thachthuc', 'loiket'];
+            tabs.forEach(t => document.getElementById('tab-' + t).classList.add('hidden'));
+            
+            const activeTab = document.getElementById('tab-' + tabId);
+            activeTab.classList.remove('hidden');
+            
+            // Xóa hiệu ứng cũ để khởi động lại
+            const animBlocks = activeTab.querySelectorAll('.anim-text');
+            animBlocks.forEach(block => {
+                block.style.opacity = '0';
+                block.style.transform = 'translateY(15px)';
+                block.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+            
+            // Kích hoạt chữ chạy liên tục, đoạn này tiếp nối đoạn kia
+            setTimeout(() => {
+                animBlocks.forEach((block, blockIndex) => {
+                    setTimeout(() => { 
+                        block.style.opacity = '1';
+                        block.style.transform = 'translateY(0)';
+                    }, blockIndex * 150); // Các dòng cách nhau 150ms
+                });
+            }, 400); // Đợi cửa sổ trượt lên hoàn tất mới chạy chữ
+        }
+
+        function closeTab() {
+            const contentView = document.getElementById('content-view');
+            contentView.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            contentView.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
+        }
+    </script>
+</body>
+</html>
